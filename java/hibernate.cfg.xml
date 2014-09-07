@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">@db.dialect@</property>
+        <property name="hibernate.connection.driver_class">@db.driver@</property>
+        <property name="hibernate.connection.url">@db.url@</property>
+        <property name="hibernate.connection.username">@db.user@</property>
+        <property name="hibernate.connection.password">@db.pass@</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="com.del.cft.test.eis.Person" />
+
+    </session-factory>
+</hibernate-configuration>

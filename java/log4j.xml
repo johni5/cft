@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+
+<log4j:configuration>
+
+    <appender name="error-app" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/cft-errors.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd-MM-yy HH:mm:ss.SSS} %5p %c{1}: %m%n "/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+        </filter>
+    </appender>
+
+    <appender name="client-log-app" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/cft-client.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd-MM-yy HH:mm:ss.SSS} %5p %c{1}: %m%n "/>
+        </layout>
+    </appender>
+
+    <appender name="log-app" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/cft.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd-MM-yy HH:mm:ss.SSS} %5p %c{1}: %m%n "/>
+        </layout>
+    </appender>
+
+    <category name="com.*">
+        <priority value="WARN"/>
+        <appender-ref ref="error-app"/>
+    </category>
+
+    <category name="com.del.cft.test.utils.ClientLog">
+        <priority value="TRACE"/>
+        <appender-ref ref="client-log-app"/>
+    </category>
+
+    <logger name="org.hibernate" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="log-app"/>
+    </logger>
+
+    <logger name="com.journaldev.hibernate" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="log-app" />
+    </logger>
+
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="log-app"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="cft" default="content">
+    <property file="build.properties"/>
+    <property name="dest" value="../"/>
+    <property name="out" value="${out_dest}"/>
+    <property name="webapp" value="${dest}/web"/>
+
+    <property name="temp_out_dir" value="${dest}/out/cft"/>
+    <property name="out_dir" value="${out}/cft"/>
+    <property name="out_web_lib" value="${out_dir}/WEB-INF/lib"/>
+
+    <property name="jar_target" value="${temp_out_dir}/lib"/>
+    <property name="java_version" value="1.7"/>
+
+    <path id="classpath">
+        <fileset dir="${dest}/lib/common">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${dest}/lib/required">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${dest}/lib/provided">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${dest}/lib/optional">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${out_dir}" failonerror="false"/>
+        <delete dir="${temp_out_dir}" failonerror="false"/>
+    </target>
+
+    <target name="clean_target_jars">
+        <delete failonerror="false">
+            <fileset dir="${out_web_lib}">
+                <include name="cft-*.jar"/>
+            </fileset>
+        </delete>
+        <delete failonerror="false">
+            <fileset dir="${jar_target}">
+                <include name="cft-*.jar"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="init_webapp" depends="clean">
+        <mkdir dir="${temp_out_dir}"/>
+        <mkdir dir="${out_dir}"/>
+        <mkdir dir="${out_web_lib}"/>
+    </target>
+
+    <target name="compile_main" >
+        <property name="t_name" value="cft"/>
+        <property name="c_target" value="${temp_out_dir}/${t_name}"/>
+
+        <mkdir dir="${out_dir}"/>
+        <mkdir dir="${out_web_lib}"/>
+        <mkdir dir="${c_target}"/>
+        <mkdir dir="${jar_target}"/>
+
+        <javac srcdir="${dest}/java"
+               destdir="${c_target}"
+               encoding="UTF-8"
+               debug="true"
+               includeantruntime="false"
+               fork="true"
+               memoryMaximumSize="512m"
+               source="${java_version}"
+               target="${java_version}">
+            <classpath refid="classpath"/>
+        </javac>
+
+        <copy todir="${c_target}">
+            <fileset dir="${dest}/java">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${c_target}">
+            <fileset dir="${dest}/java">
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+                <include name="log4j.dtd"/>
+            </fileset>
+        </copy>
+
+        <replace file="${c_target}/hibernate.cfg.xml" token="@db.user@" value="${db.user}"/>
+        <replace file="${c_target}/hibernate.cfg.xml" token="@db.pass@" value="${db.pass}"/>
+        <replace file="${c_target}/hibernate.cfg.xml" token="@db.url@" value="${db.url}"/>
+        <replace file="${c_target}/hibernate.cfg.xml" token="@db.driver@" value="${db.driver}"/>
+        <replace file="${c_target}/hibernate.cfg.xml" token="@db.dialect@" value="${db.dialect}"/>
+
+        <jar destfile="${jar_target}/${t_name}.jar" basedir="${c_target}"/>
+
+        <copy todir="${out_web_lib}">
+            <fileset dir="${jar_target}">
+                <include name="${t_name}.jar"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="content" depends="compile_main">
+        <mkdir dir="${out_dir}"/>
+        <copy todir="${out_dir}" encoding="UTF8" overwrite="true">
+            <fileset dir="${webapp}">
+                <exclude name="META-INF/**"/>
+                <exclude name="tmp/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${out_web_lib}">
+            <fileset dir="${dest}/lib/common">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${dest}/lib/required">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${dest}/lib/provided">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="webapp">
+        <copy todir="${out_dir}" encoding="UTF8">
+            <fileset dir="${webapp}">
+                <exclude name="META-INF/**"/>
+                <exclude name="tmp/**"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="rebuild" depends="clean,content"/>
+
+</project>

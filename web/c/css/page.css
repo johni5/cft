@@ -1,0 +1,292 @@
+body, html {
+    background-color: #fee;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    color: #2f2f2f;
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+#root {
+    padding: 30px;
+}
+
+form {
+    display: inline;
+}
+
+a {
+    font-size: 12px;
+    color: #479ffb;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1, h2, h3 {
+    font-family: Myriad, sans-serif;
+}
+
+h1 {
+    font-size: 30px;
+    color: #565656;
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+
+h2 {
+    font-size: 16px;
+    color: #565656;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+h3 {
+    color: #7F2323;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+.messages li, .errors li {
+    list-style: none;
+}
+
+.messages, .errors {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.messages ul, .errors ul {
+    margin: 0;
+}
+
+.errors li {
+    color: #b00;
+    padding: 20px;
+    width: 300px;
+}
+
+.messages li {
+    color: #0b0;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+}
+
+.common_table {
+    width: 100%;
+}
+
+.common_table td, .common_table th {
+    text-align: left;
+    padding: 2px 4px;
+}
+
+.common_table td.last, .common_table th.last {
+    border-right: none;
+}
+
+.common_table th {
+    background-color: #ccc;
+    color: #000;
+}
+
+.common_table td {
+    background-color: #eee;
+}
+
+.common_table .transparent_bg td {
+    background-color: transparent;
+}
+
+.common_table .current td {
+    background-color: #A6EEC2;
+}
+
+.common_table .current td, .common_table .current.week_day_7 td, .common_table .current.week_day_1 td {
+    background-color: #A6EEC2;
+}
+
+.common_table .week_day_7 td, .common_table .week_day_1 td {
+    background-color: #ffc6df;
+}
+
+.common_table td.me {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0e17ff;
+}
+
+.common_table tr.my_date td {
+    border-bottom: 1px solid #0e17ff;
+    border-top: 1px solid #0e17ff;
+}
+
+.common_table tr.my_date td.first {
+    border-left: 1px solid #0e17ff;
+}
+
+.common_table tr.my_date td.last {
+    border-right: 1px solid #0e17ff;
+}
+
+input[type='text'], input[type='password'], select {
+    margin: 2px;
+}
+
+.input_common, .select_common, .textarea_common {
+    background: #d1d1d1; /* Old browsers */
+    background: -moz-linear-gradient(top, #d1d1d1 0%, #eeeded 1%, #f3f2f2 6%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d1d1d1), color-stop(1%, #eeeded), color-stop(6%, #f3f2f2), color-stop(100%, #ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #d1d1d1 0%, #eeeded 1%, #f3f2f2 6%, #ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #d1d1d1 0%, #eeeded 1%, #f3f2f2 6%, #ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #d1d1d1 0%, #eeeded 1%, #f3f2f2 6%, #ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #d1d1d1 0%, #eeeded 1%, #f3f2f2 6%, #ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    margin: 0;
+    outline: medium none;
+    text-align: left;
+    color: #1a3c60;
+}
+
+.input_common {
+    padding: 4px 5px;
+    width: 306px;
+}
+
+.input_common.input_short {
+    width: 143px;
+}
+
+.list_common {
+    margin: 10px 0;
+    padding-left: 20px;
+    font-size: 10px;
+}
+
+.select_common.rooms_select {
+    width: 50px;
+}
+
+.select_common {
+    padding: 4px 5px;
+    width: 161px;
+    height: 27px;
+}
+
+.nomarked_list {
+    list-style: none;
+}
+
+.textarea_common {
+    border: none;
+    background-color: #f0f0f0;
+    font-size: 14px;
+    color: #000;
+    padding: 4px 5px;
+}
+
+span.required {
+    color: #f00;
+    padding: 0 2px;
+    font-size: 17px;
+    display: inline-block;
+    width: 20px;
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+.nomarked_list.inputs li {
+    padding-bottom: 10px;
+}
+
+.errors_and_messages, .global_messages_container, .global_errors_container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #fff;
+    border-radius: 10px;
+    color: #7F2323;
+    border: 1px solid #7F2323;
+    font-weight: bold;
+}
+
+.global_messages_container {
+    color: #0b0;
+}
+
+#calendar_table.common_table {
+    width: 70%;
+}
+
+#total_admin_table.common_table {
+    width: 10%;
+}
+
+#total_monitor_table.common_table {
+    width: 10%;
+}
+
+.calendar_tables {
+    float: left;
+    margin-right: 10px;
+}
+
+.common_table tr.level_small td {
+    background-color: #fff6be;
+}
+
+.common_table tr.level_normal td {
+    background-color: #beffc4;
+}
+
+.common_table tr.level_large td {
+    background-color: #ffc6df;
+}
+
+.select_common.month_select, .select_common.year_select {
+    padding: 2px 5px;
+    height: 25px;
+}
+
+.select_common.year_select {
+    width: 80px;
+}
+
+.select_common.month_select {
+    width: 110px;
+}
+
+#change_log_container {
+    float: left;
+    margin-top: 20px;
+}
+
+.form_table td {
+    vertical-align: middle;
+}
+
+#login_form .input_common {
+    width: 160px;
+}
+
+.duty_day:hover td {
+    background: #479ffb;
+}
+
+.duty_day:hover td option {
+    background: #fff;
+}
